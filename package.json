@@ -1,0 +1,19 @@
+{
+  "name": "news-portal-api",
+  "version": "1.0.0",
+  "description": "news portal server side",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergey-moiseyenko/news-portal-api.git"
+  },
+  "author": "Sergey Moiseyenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergey-moiseyenko/news-portal-api/issues"
+  },
+  "homepage": "https://github.com/sergey-moiseyenko/news-portal-api#readme"
+}
