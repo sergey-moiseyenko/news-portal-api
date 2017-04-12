@@ -16,9 +16,20 @@ class ArticleMapper {
       return (this.db.articles.findOne({id: id}))? this.db.articles.findOne({id: id}): undefined;
     }
 
-    loadArticles() {
-      this.db.loadCollections(['articles']);
-      return this.db.articles.find();
+    loadArticles(filter) {
+      if (Object.keys(filter).length === 0) return this.db.articles.find();
+
+      let filterTags = filter.tags || [];
+      delete filter.tags;
+
+      let articles = this.db.articles.find(filter);
+      console.log(articles);
+      let filteredArticles = articles.filter(article => {
+        if (!filterTags.every(tag => article.tags.includes(tag))) return false;
+        return true;
+      });
+
+      return filteredArticles;
     }
 
     update(article) {

@@ -50,7 +50,7 @@ app.post('/article', (req, res) => {
 //<-- get methods -->
 app.get('/articles', (req, res) => {
   setOriginHeader(res);
-  res.send(articleMapper.loadArticles());
+  res.send(articleMapper.loadArticles(JSON.parse(req.query.parameters)));
 });
 
 app.get('/article/:id', (req, res) => {
