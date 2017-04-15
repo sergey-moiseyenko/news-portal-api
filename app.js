@@ -41,23 +41,23 @@ app.post('/tag', (req, res) => {
   res.json(req.body);
 });
 
+app.options('/article', cors());
 app.post('/article', (req, res) => {
-  setOriginHeader(res);
   articleMapper.addArticle(req.body);
   res.json(req.body);
 });
 
 //<-- get methods -->
+app.options('/article', cors());
 app.get('/articles', (req, res) => {
-  setOriginHeader(res);
   res.send(articleMapper.loadArticles(JSON.parse(req.query.parameters)));
 });
 
+app.options('/article', cors());
 app.get('/article/:id', (req, res) => {
-  setOriginHeader(res);
   let article = articleMapper.getArticle(req.params.id);
   if (!article) res.send({});
-  res.send(article);
+  else res.send(article);
 });
 
 app.get('/current_user', (req, res) => {
