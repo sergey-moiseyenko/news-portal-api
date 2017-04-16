@@ -9,6 +9,7 @@ class TagMapper {
     let tagMap = this.db.tags.find()[0];
     let props = Object.keys(tagMap);
     props.splice(props.indexOf('_id'));
+    console.log(tagMap);
     return props;
   }
 

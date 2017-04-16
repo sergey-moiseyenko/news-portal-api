@@ -48,7 +48,7 @@ app.post('/article', (req, res) => {
 });
 
 //<-- get methods -->
-app.options('/article', cors());
+app.options('/articles', cors());
 app.get('/articles', (req, res) => {
   res.send(articleMapper.loadArticles(JSON.parse(req.query.parameters)));
 });

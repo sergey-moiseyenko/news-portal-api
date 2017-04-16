@@ -38,7 +38,6 @@ class ArticleMapper {
       delete filter.tags;
       let filterKeys = Object.keys(filter);
       let filteredArticles = articles.filter(article => {
-        //if (!filterTags.every(tag => article.tags.includes(tag))) return false;
         if (ids.length !== 0 && ids.indexOf(article.id) === -1) return false;
         return filterKeys.every(filterKey => filter[filterKey].toString() === article[filterKey].toString());
       });
