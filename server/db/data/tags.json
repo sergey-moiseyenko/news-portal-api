@@ -1,13 +1,1 @@
-[
-  {
-    "tag": "media"
-  },
-
-  {
-    "tag": "sport"
-  },
-
-  {
-    "tag": "politics"
-  }
-]
+[{"media":{"tag":"media","ids":["1492297844370"]},"sport":{"tag":"sport","ids":["1492300204853"]},"politics":{"tag":"politics","ids":[]},"_id":"d3b5f1110e60499e83e13bcfe4361053"}]
