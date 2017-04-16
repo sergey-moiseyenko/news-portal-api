@@ -13,7 +13,14 @@ class TagMapper {
   }
 
   updateTags(tag) {
-      this.db.tags.save(tag);
+    this.config.TAGS.push(tag.tag);
+    let tagMap = this.db.tags.find()[0];
+    tagMap[tag.tag] = {
+      'tag': tag.tag,
+      ids: []
+    };
+
+    this.reloadCollection().save(tagMap);
   }
 
   addId(id, tags) {
