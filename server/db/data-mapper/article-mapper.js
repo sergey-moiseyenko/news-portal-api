@@ -60,7 +60,7 @@ class ArticleMapper {
     isArticleValid (article) {
       if (!article) return false;
       const props = this.config.VALIDATION_SCHEMA.ARTICLE.all();
-      return props.every(p => article.hasOwnProperty(p.key) && this.classOf(article[p.key]) === p.type);
+      return props.every(p => article.hasOwnProperty(p.key) && this.classOf(article[p.key]) === p.type)
     };
 
     update(article) {
@@ -86,6 +86,11 @@ class ArticleMapper {
     }
 
     addArticle(article) {
+
+      if (!article) return;
+      article.createdAt = new Date(article.createdAt);
+      if (!this.isArticleValid(article)) return;
+
       let articleMap = this.db.articles.find()[0];
       articleMap[article.id] = article;
 
