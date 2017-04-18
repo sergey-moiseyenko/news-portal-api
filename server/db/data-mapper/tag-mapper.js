@@ -29,8 +29,7 @@ class TagMapper {
 
     tags.forEach(tagName => {
       let tag = tagMap[tagName];
-      console.log(tag);
-      tag.ids.push(id);
+      if (tag) tag.ids.push(id);
     });
     this.reloadCollection().save(tagMap);
   }
