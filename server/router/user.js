@@ -1,35 +1,19 @@
 const express = require('express');
 let router = express.Router();
-//let passport = require('../config/passport/passport-basic');
-let passport = require('../config/passport/passport-digest');
+let passport = require('../passport/passport-local');
 
-//local auth
-/*router.post('/user', passport.authenticate('local'), (req, res) => {
-  res.send(req.user);
+router.post('/user', passport.authenticate('local'), (req, res) => {
+    res.sendStatus(200);
 });
 
+router.get('/isLogin', (req, res) => {
+  if (req.user) res.send(req.user.username);
+  else res.sendStatus(401);
+});
 
 router.delete('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
-
-*/
-
-//basic auth
-/*router.get('/user',
-  passport.authenticate('basic', {session: false}),
-  (req, res) => {
-    res.send(req.user);
-  });
-*/
-
-//digest auth
-router.get('/user',
-  passport.authenticate('digest', { session: false }),
-  (req, res) => {
-    res.send(req.user);
-  });
-
 
 module.exports = router;

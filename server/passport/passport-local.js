@@ -19,4 +19,13 @@ passport.use(new LocalStrategy(
     return done(null, user);
   }));
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  console.log('asfasfd');
+  done(null, user);
+});
+
 module.exports = passport;
