@@ -18,4 +18,4 @@ class ArticleModel {
   }
 }
 
-module.exports = new ArticleModel();
+module.exports = new ArticleModel().Article;

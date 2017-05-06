@@ -1,14 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const tagMapper = require('../db/data-mapper/tag-mapper');
+let tagCV = require('../db/controller/tag-controller');
 
 router.post('/tag', (req, res) => {
-  tagMapper.updateTags(req.body);
-  res.json(req.body);
+
+  let onload = () => {
+    res.json(req.body);
+  };
+
+  tagCV.updateTags(req.body, onload);
 });
 
 router.get('/tags', (req, res) => {
-  res.send(tagMapper.getTagsFromDb());
+
+  let onload = (tags) => {
+    res.send(tags);
+  };
+
+  tagCV.getTagsFromDb(onload);
 });
 
 module.exports = router;

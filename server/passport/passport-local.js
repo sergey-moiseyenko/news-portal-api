@@ -26,7 +26,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('asfasfd');
   done(null, user);
 });
 

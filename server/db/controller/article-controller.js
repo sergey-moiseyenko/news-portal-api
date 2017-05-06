@@ -1,7 +1,7 @@
 class ArticleController {
 
   constructor() {
-    this.Article = require('../model/article-model').Article;
+    this.Article = require('../model/article-model');
   }
 
   load(filter) {

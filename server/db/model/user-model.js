@@ -13,4 +13,4 @@ class UserModel {
   }
 }
 
-module.exports = new UserModel();
+module.exports = new UserModel().User;

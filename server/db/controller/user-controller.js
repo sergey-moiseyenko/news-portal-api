@@ -1,7 +1,7 @@
 class UserController {
 
   constructor() {
-    this.User = require('../model/user-model').User;
+    this.User = require('../model/user-model');
   }
 
   getUserByName(username) {
@@ -10,11 +10,6 @@ class UserController {
 
   isValidPassword(user, password) {
     return user.password === password;
-  }
-
-  save(user) {
-    let us = new this.User(user);
-    us.save();
   }
 }
 
