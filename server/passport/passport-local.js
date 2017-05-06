@@ -1,21 +1,24 @@
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
-const userMapper = require('../db/data-mapper/user-mapper');
+const userCV = require('../db/controller/user-controller');
 
 passport.use(new LocalStrategy(
   {passReqToCallback: true},
 
   (req, username, password, done) => {
 
-    let user = userMapper.getUserByName(username);
+    userCV.getUserByName(username).exec((err, user) => {
 
-    if (!user) return done(null, false);
+      if (err) return done(null, false);
 
-    if (!userMapper.isValidPassword(user, password)) {
-      return done(null, false);
-    }
+      if (!user) return done(null, false);
 
-    return done(null, user);
+      if (!userCV.isValidPassword(user, password)) {
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
   }));
 
 passport.serializeUser((user, done) => {

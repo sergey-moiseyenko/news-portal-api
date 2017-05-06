@@ -5,9 +5,9 @@ let fs = require('fs');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let session = require('express-session');
-let SessionStore = require('connect-diskdb')(session);
-
-//test mongo
+let MongoDBStore = require('connect-mongodb-session')(session);
+let store = new MongoDBStore({uri: 'mongodb://localhost:27017/test', collection: 'sessions'});
+let passport = require('./server/passport/passport-local');
 
 //<-- cors option -->
 let corsOption = {
@@ -23,43 +23,18 @@ app.use(cors(corsOption));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-let options = {
-  path: __dirname + '/server/db/data',
-  name: 'sessions'
-};
-
-let sessionStore = new SessionStore(options);
-
 app.use(session({
   name: 'rovny',
   secret: 'wild',
   resave: false,
   saveUninitialized: true,
-  store: sessionStore
+  store: store
 }));
-
-let passport = require('./server/passport/passport-local');
-
 // Passport:
 app.use(passport.initialize());
 app.use(passport.session());
 
 //<-- config routes -->
-
-/*app.post('/article/article', (req, res) => {
-
-  let test = require('./server/db/controller/article-controller');
-  test.add(req.body);
-  res.json(req.body);
-});
-
-app.get('/article/articles', (req, res) => {
-  res.send([]);
-});
-
-*/
-
 app.use('/article', require('./server/router/article'));
 app.use('/user', require('./server/router/user'));
 app.use('/tag', require('./server/router/tag'));
