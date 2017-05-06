@@ -7,6 +7,8 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let SessionStore = require('connect-diskdb')(session);
 
+//test mongo
+
 //<-- cors option -->
 let corsOption = {
   origin: 'http://localhost:8000',
@@ -44,6 +46,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //<-- config routes -->
+
+/*app.post('/article/article', (req, res) => {
+
+  let test = require('./server/db/controller/article-controller');
+  test.add(req.body);
+  res.json(req.body);
+});
+
+app.get('/article/articles', (req, res) => {
+  res.send([]);
+});
+
+*/
+
 app.use('/article', require('./server/router/article'));
 app.use('/user', require('./server/router/user'));
 app.use('/tag', require('./server/router/tag'));

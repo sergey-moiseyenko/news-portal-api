@@ -11,7 +11,6 @@ passport.use(new LocalStrategy(
 
     if (!user) return done(null, false);
 
-
     if (!userMapper.isValidPassword(user, password)) {
       return done(null, false);
     }
