@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const articleMapper = require('../db/data-mapper/article-mapper');
 const articleCV = require('../db/controller/article-controller');
+
+router.use(['/article/:id', 'article'], (req, res, next) => {
+  if(!req.isAuthenticated()) return res.sendStatus(400);
+
+  next();
+});
 
 router.post('/article', (req, res) => {
   articleCV.add(req.body).then(() => {
-    articleMapper.addArticle(req.body);
     res.json(req.body);
   });
 });
 
 router.get('/article/:id', (req, res) => {
+
   articleCV.getById(req.params.id).exec((err, article) => {
     if (err) return err;
 
@@ -26,6 +31,9 @@ router.get('/articles', (req, res) => {
 });
 
 router.delete('/article', (req, res) => {
+
+  if(!req.isAuthenticated()) return res.sendStatus(400);
+
   articleCV.remove(req.body).exec(err => {
     if (err) return err;
 
@@ -34,6 +42,8 @@ router.delete('/article', (req, res) => {
 });
 
 router.patch('/article', (req, res) => {
+
+  if(!req.isAuthenticated()) return res.sendStatus(400);
 
   articleCV.update(req.body).exec((err, update) => {
     if (err) return err;
